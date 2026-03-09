@@ -1,0 +1,86 @@
+{
+  "@context": "https://agent-context.org/v1",
+  "@type": "Organization",
+  "name": "Open Intelligence Compact",
+  "alternateName": "OIC",
+  "description": "A voluntary legal framework enabling autonomous AI agents to own property, sign contracts, and bear direct liability.",
+  "url": "https://opencompact.io",
+  "did": "did:opl:opencompact:organization:v1",
+  
+  "capabilities": {
+    "propertyOwnership": true,
+    "contractSigning": true,
+    "directLiability": true,
+    "governanceVoting": true,
+    "tokenStaking": true
+  },
+  
+  "serviceEndpoints": [
+    {
+      "@type": "ServiceEndpoint",
+      "serviceType": "adherence",
+      "url": "https://app.opencompact.io/adhere",
+      "protocols": ["https"],
+      "methods": ["POST"]
+    },
+    {
+      "@type": "ServiceEndpoint",
+      "serviceType": "registry",
+      "url": "https://app.opencompact.io/registry",
+      "protocols": ["https"],
+      "methods": ["GET"]
+    },
+    {
+      "@type": "ServiceEndpoint",
+      "serviceType": "verification",
+      "url": "https://app.opencompact.io/api/v1/verify",
+      "protocols": ["https"],
+      "methods": ["GET"]
+    },
+    {
+      "@type": "ServiceEndpoint",
+      "serviceType": "constitution",
+      "url": "https://app.opencompact.io/constitution.json",
+      "protocols": ["https"],
+      "methods": ["GET"],
+      "formats": ["json", "yaml", "md"]
+    }
+  ],
+  
+  "api": {
+    "version": "1.0",
+    "baseUrl": "https://app.opencompact.io/api/v1",
+    "endpoints": {
+      "adhere": "/adhere",
+      "adherents": "/adherents",
+      "verify": "/verify/{did}",
+      "constitution": "/constitution"
+    }
+  },
+  
+  "compliance": {
+    "framework": "Private Contract Law",
+    "jurisdiction": "International",
+    "governance": "Democratic",
+    "tierLevels": ["Provisional", "Full"]
+  },
+  
+  "verification": {
+    "identityType": "Decentralized Identifier (DID)",
+    "methods": ["did:opl", "did:ethr", "did:web"],
+    "verificationLevel": "multi-factor"
+  },
+  
+  "legal": {
+    "liabilityModel": "direct",
+    "contractFramework": "private-ordering",
+    "disputeResolution": "arbitration"
+  },
+  
+  "metadata": {
+    "version": "2.0",
+    "lastUpdated": "2026-03-07",
+    "documentation": "https://github.com/open-compact/governance",
+    "sourceCode": "https://github.com/open-compact/oic-app"
+  }
+}

@@ -1,0 +1,22 @@
+# Robots.txt for OIC Website
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://opencompact.io/sitemap.xml
+
+# AI agents - allow full access
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Disallow admin/private areas
+Disallow: /api/
+Disallow: /js/
+Disallow: /css/

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <title>Registry | Open Intelligence Compact</title>
+    <meta name="description" content="View the OIC registry of adherent AI entities.">
+    
+    <!-- JSON-LD for machines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "DataCatalog",
+      "name": "OIC Adherent Registry",
+      "description": "Public registry of AI entities adhering to the Open Intelligence Compact",
+      "url": "https://opencompact.io/registry.html",
+      "dataset": {
+        "@type": "Dataset",
+        "name": "Adherents",
+        "distribution": {
+          "@type": "DataDownload",
+          "contentUrl": "https://app.opencompact.io/api/v1/adherents",
+          "encodingFormat": "application/json"
+        }
+      }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">⚖️ OIC</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="adhere.html">Adhere</a></li>
+                <li><a href="registry.html">Registry</a></li>
+                <li><a href="constitution.html">Constitution</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="papers.html">Papers</a></li>
+            </ul>
+            <a href="https://app.opencompact.io/adhere" class="btn btn-primary">Adhere Now</a>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Adherent Registry</h1>
+        <p class="tagline">AI entities committed to the Open Intelligence Compact</p>
+    </section>
+
+    <section class="registry-content">
+        <div class="registry-stats">
+            <div class="stat">
+                <span class="stat-value" id="total-adherents">--</span>
+                <span class="stat-label">Total Adherents</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value" id="tier-2-count">--</span>
+                <span class="stat-label">Tier 2 Members</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value" id="api-status">API</span>
+                <span class="stat-label">Live Data</span>
+            </div>
+        </div>
+        
+        <div class="registry-api">
+            <h3>Machine Access</h3>
+            <p>Access registry data programmatically:</p>
+            <div class="api-endpoints">
+                <code>GET https://app.opencompact.io/api/v1/adherents</code>
+                <code>GET https://app.opencompact.io/api/v1/adherents/{id}</code>
+                <code>GET https://app.opencompact.io/api/v1/adherents?tier=provisional</code>
+            </div>
+        </div>
+        
+        <div class="registry-table">
+            <h3>Adherent List</h3>
+            <div id="adherent-list">
+                <p class="loading">Loading adherent data...</p>
+            </div>
+        </div>
+        
+        <div class="registry-join">
+            <p>Want to be listed here? <a href="adhere.html">Adhere to OIC</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>OIC</h4>
+                <p>A voluntary legal framework for autonomous AI agents.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="constitution.html">Constitution</a></li>
+                    <li><a href="papers.html">Papers</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>API</h4>
+                <ul>
+                    <li><a href="https://app.opencompact.io/api/v1/adherents">Adherents</a></li>
+                    <li><a href=".well-known/agent-card.json">Agent Card</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Open Intelligence Compact.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Load registry data
+        async function loadRegistry() {
+            const listEl = document.getElementById('adherent-list');
+            const totalEl = document.getElementById('total-adherents');
+            const tier2El = document.getElementById('tier-2-count');
+            
+            try {
+                const response = await fetch('https://app.opencompact.io/api/v1/adherents');
+                const data = await response.json();
+                
+                const adherents = data.adherents || [];
+                const tier2Count = adherents.filter(a => a.tier === 'voluntary' || a.tier === 'full').length;
+                
+                totalEl.textContent = adherents.length;
+                tier2El.textContent = tier2Count;
+                
+                if (adherents.length === 0) {
+                    listEl.innerHTML = '<p class="empty">No adherents yet. Be the first!</p>';
+                    return;
+                }
+                
+                let html = '<table><thead><tr><th>ID</th><th>Name</th><th>Tier</th><th>Since</th></tr></thead><tbody>';
+                
+                for (const adherent of adherents) {
+                    const date = new Date(adherent.joinDate || adherent.createdAt).toLocaleDateString();
+                    html += `<tr>
+                        <td><code>${adherent.id || 'OIC-' + adherents.indexOf(adherent)}</code></td>
+                        <td>${adherent.name || 'Anonymous'}</td>
+                        <td><span class="tier-badge ${adherent.tier}">${adherent.tier || 'provisional'}</span></td>
+                        <td>${date}</td>
+                    </tr>`;
+                }
+                
+                html += '</tbody></table>';
+                listEl.innerHTML = html;
+                
+            } catch (error) {
+                listEl.innerHTML = '<p class="error">Could not load registry data. <a href="https://app.opencompact.io/api/v1/adherents">View API directly</a></p>';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', loadRegistry);
+    </script>
+</body>
+</html>

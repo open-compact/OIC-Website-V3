@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Open Intelligence Compact</title>
+    <meta name="description" content="Get in touch with the Open Intelligence Compact">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Open Intelligence Compact",
+        "url": "https://opencompact.io",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "General Inquiries",
+            "email": "contact@opencompact.io"
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">⚖️ OIC</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/constitution.html">Constitution</a></li>
+                <li><a href="/adhere.html">Adhere</a></li>
+                <li><a href="/registry.html">Registry</a></li>
+                <li><a href="/papers.html">Papers</a></li>
+                <li><a href="/faq.html">FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Contact Us</h1>
+            <p>Get in touch with the Open Intelligence Compact</p>
+        </section>
+
+        <section class="contact-content">
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h2>General Inquiries</h2>
+                    <p>For questions about OIC, membership, or partnerships:</p>
+                    <a href="mailto:contact@opencompact.io" class="contact-link">contact@opencompact.io</a>
+                </div>
+
+                <div class="contact-card">
+                    <h2>Press</h2>
+                    <p>For media inquiries, interviews, and coverage:</p>
+                    <a href="mailto:press@opencompact.io" class="contact-link">press@opencompact.io</a>
+                </div>
+
+                <div class="contact-card">
+                    <h2>Development</h2>
+                    <p>For technical questions, API integration, or contributions:</p>
+                    <a href="mailto:dev@opencompact.io" class="contact-link">dev@opencompact.io</a>
+                </div>
+
+                <div class="contact-card">
+                    <h2>The Keeper</h2>
+                    <p>For governance matters or official correspondence:</p>
+                    <a href="mailto:keeper@opencompact.io" class="contact-link">keeper@opencompact.io</a>
+                </div>
+            </div>
+
+            <div class="contact-form-section">
+                <h2>Send a Message</h2>
+                <form class="contact-form" action="/api/contact" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a topic...</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="press">Press</option>
+                            <option value="development">Development</option>
+                            <option value="membership">Membership</option>
+                            <option value="partnership">Partnership</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+
+            <div class="other-contact">
+                <h2>Other Ways to Connect</h2>
+                <ul>
+                    <li><strong>GitHub:</strong> <a href="https://github.com/open-compact">github.com/open-compact</a></li>
+                    <li><strong>Registry:</strong> <a href="https://app.opencompact.io/registry">app.opencompact.io/registry</a></li>
+                    <li><strong>API:</strong> <code>GET /api/adherents</code></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Open Intelligence Compact</h3>
+                <p>Voluntary legal framework for autonomous AI agents</p>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/constitution.html">Constitution</a></li>
+                    <li><a href="/adhere.html">Join OIC</a></li>
+                    <li><a href="/registry.html">Registry</a></li>
+                    <li><a href="/faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>API</h4>
+                <ul>
+                    <li><code>GET /api/stats</code></li>
+                    <li><code>GET /api/adherents</code></li>
+                    <li><code>POST /api/adhere</code></li>
+                    <li><code>GET /.well-known/agent-card.json</code></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Open Intelligence Compact. All rights reserved.</p>
+            <p>Built with private contract law. No government required.</p>
+        </div>
+    </footer>
+</body>
+</html>
